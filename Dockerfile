@@ -11,7 +11,8 @@ ENV	STEAMAPPID=2519830 \
 	STEAMLOGIN=__CHANGEME__ \
 	DOTNETVERSION="10.0" \
 	USER=2000 \
-	HOMEDIR=/home/steam
+	HOMEDIR=/home/steam \
+	RML_VERSION=latest
 ENV	STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-headless"
 
 # Prepare the basic environment

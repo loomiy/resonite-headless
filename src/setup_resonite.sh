@@ -5,6 +5,18 @@ if [ -n "${STEAMBETAPASSWORD}" ]; then
 	BETAPASSWORDPARAM="-betapassword ${STEAMBETAPASSWORD}"
 fi
 
+# RML Setup
+mkdir -p ${STEAMAPPDIR}/Libraries ${STEAMAPPDIR}/rml_config ${STEAMAPPDIR}/rml_libs ${STEAMAPPDIR}/rml_mods
+
+if [ "$RML_VERSION" = "latest" ]; then
+    RML_URL="https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download"
+else
+    RML_URL="https://github.com/resonite-modding-group/ResoniteModLoader/releases/download/${RML_VERSION}"
+fi
+
+curl -L -o "${STEAMAPPDIR}/Libraries/ResoniteModLoader.dll" "${RML_URL}/ResoniteModLoader.dll"
+curl -L -o "${STEAMAPPDIR}/rml_libs/0Harmony.dll" "${RML_URL}/0Harmony.dll"
+
 bash "${STEAMCMDDIR}/steamcmd.sh" \
 	+@sSteamCmdForcePlatformType windows \
 	+force_install_dir ${STEAMAPPDIR} \
