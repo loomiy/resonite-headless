@@ -1,3 +1,14 @@
+# rusty-reso-ws-tty build
+FROM rust:latest AS rust-builder
+
+RUN apt-get update && \
+    apt-get install -y pkg-config libssl-dev git && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN cargo install --git https://gitlab.peacefulbeast.eu/TomTam/rusty-reso-ws-tty --root /build
+
+
+
 FROM	ubuntu:questing
 
 LABEL	name=resonite-headless org.opencontainers.image.authors="panther.ru@gmail.com"
@@ -20,8 +31,12 @@ ENV	STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-headless"
 RUN	set -x && \
 	apt -y update && \
 	apt -y upgrade && \
-	apt -y install curl lib32gcc-s1 libfreetype6 libbrotli1 libicu76 && \
+	apt -y install btop curl lib32gcc-s1 libfreetype6 libbrotli1 libicu76 && \
 	rm -rf /var/lib/{apt,dpkg,cache}
+
+# Copy rusty-reso-ws-tty 
+COPY --from=rust-builder /build/bin/rusty-websocket-tty /usr/local/bin/rusty-websocket-tty
+RUN chmod 755 /usr/local/bin/rusty-websocket-tty
 
 # Add locales
 RUN	apt-get update && \
