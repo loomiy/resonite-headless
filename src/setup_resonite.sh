@@ -14,8 +14,8 @@ else
     RML_URL="https://github.com/resonite-modding-group/ResoniteModLoader/releases/download/${RML_VERSION}"
 fi
 
-curl -L -o "${STEAMAPPDIR}/Libraries/ResoniteModLoader.dll" "${RML_URL}/ResoniteModLoader.dll"
-curl -L -o "${STEAMAPPDIR}/rml_libs/0Harmony.dll" "${RML_URL}/0Harmony.dll"
+curl -L -z "${STEAMAPPDIR}/Libraries/ResoniteModLoader.dll" -o "${STEAMAPPDIR}/Libraries/ResoniteModLoader.dll" "${RML_URL}/ResoniteModLoader.dll"
+curl -L -z "${STEAMAPPDIR}/rml_libs/0Harmony.dll" -o "${STEAMAPPDIR}/rml_libs/0Harmony.dll" "${RML_URL}/0Harmony.dll"
 
 bash "${STEAMCMDDIR}/steamcmd.sh" \
 	+@sSteamCmdForcePlatformType windows \
