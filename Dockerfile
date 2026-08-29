@@ -7,9 +7,7 @@ RUN apt-get update && \
 
 RUN cargo install --git https://gitlab.peacefulbeast.eu/TomTam/rusty-reso-ws-tty --root /build
 
-
-
-FROM	ubuntu:questing
+FROM mcr.microsoft.com/dotnet/runtime:10.0
 
 LABEL	name=resonite-headless org.opencontainers.image.authors="panther.ru@gmail.com"
 
@@ -31,7 +29,7 @@ ENV	STEAMAPPDIR="${HOMEDIR}/${STEAMAPP}-headless"
 RUN	set -x && \
 	apt -y update && \
 	apt -y upgrade && \
-	apt -y install btop curl lib32gcc-s1 libfreetype6 libbrotli1 libicu76 && \
+	apt -y install btop curl libfreetype6 libfreetype6 lib32gcc-s1 libopus-dev libopus0 opus-tools && \
 	rm -rf /var/lib/{apt,dpkg,cache}
 
 # Copy rusty-reso-ws-tty 

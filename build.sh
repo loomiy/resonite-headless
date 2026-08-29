@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker buildx build -t shadowpanther/resonite-headless .
+docker buildx build -t ghcr.io/loomiy/resonite-headless:latest . --push
